@@ -1,0 +1,2 @@
+python-allib==0.4.3.0
+rpy2
