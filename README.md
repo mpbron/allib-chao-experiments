@@ -11,11 +11,12 @@ experiments in our paper. In our work, we used our library
 [`python-allib`](https://github.com/mpbron/python-allib) to perform the
 experiment in our study.
 
-## Quick tour of Technology-Assisted Review simulation
+## Installation
 
-### Download the datasets
+Clone the repository on your system (using `git clone ...`) or download
+it as a zip archive.
 
-We used the following datasets:
+## Download the datasets
 
 From [this file on
 SurfDrive](https://surfdrive.surf.nl/files/index.php/s/d74PiMieCQHcdMO)
@@ -26,10 +27,12 @@ we used datasets from
 [SYNERGY](https://github.com/asreview/synergy-dataset) \[1\] in our
 experiments. Use the SYNERGY Python package to retrieve the datasets.
 
-## Installation
+We included the following datasets in our study:
 
-Clone the repository on your system (using `git clone ...`) or download
-it as a zip archive.
+- CLEF2017
+- CLEF2018
+- CLEF2019
+- SYNERGY
 
 ## Experiments on Bare Metal
 
@@ -65,7 +68,7 @@ amount of RAM is needed when applying it to large datasets. For a
 dataset of 15000 documents, 20 GB of RAM is needed, and memory
 consumption grows quadratically in terms of dataset size.
 
-### Experiments
+### Run the benchmark experiments
 
 You can perform a single experiment with the following commands:
 
@@ -148,11 +151,7 @@ working directory should be the root of this repository.
 
 ``` console
 $ podman build -t allib-chao .
-```
-
-Or:
-
-``` console
+# OR
 $ docker build -t allib-chao .
 ```
 

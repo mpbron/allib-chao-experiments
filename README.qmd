@@ -50,17 +50,23 @@ bibliography: sources.bib
 
 In this repository, we publish the code that was used to perform the experiments in our paper. In our work, we used our library [`python-allib`](https://github.com/mpbron/python-allib) to perform the experiment in our study.
 
-## Quick tour of Technology-Assisted Review simulation
 
-### Download the datasets
-
-We used the following datasets:
-
-From [this file on SurfDrive](https://surfdrive.surf.nl/files/index.php/s/d74PiMieCQHcdMO) (provided by [@li2020]), you can extract the CLEF2017, CLEF2018, CLEF2019 sets. The archive can be expanded to a folder of your choosing. You can run the experiments on the other datasets included as well. Furthermore, we used datasets from [SYNERGY](https://github.com/asreview/synergy-dataset) [@debruin] in our experiments. Use the SYNERGY Python package to retrieve the datasets.
 
 ## Installation
 
 Clone the repository on your system (using `git clone ...`) or download it as a zip archive.
+
+## Download the datasets
+
+From [this file on SurfDrive](https://surfdrive.surf.nl/files/index.php/s/d74PiMieCQHcdMO) (provided by [@li2020]), you can extract the CLEF2017, CLEF2018, CLEF2019 sets. The archive can be expanded to a folder of your choosing. You can run the experiments on the other datasets included as well. Furthermore, we used datasets from [SYNERGY](https://github.com/asreview/synergy-dataset) [@debruin] in our experiments. Use the SYNERGY Python package to retrieve the datasets.
+
+We included the following datasets in our study:
+
+- CLEF2017
+- CLEF2018
+- CLEF2019
+- SYNERGY
+
 
 ## Experiments on Bare Metal
 
@@ -84,7 +90,7 @@ You need a system with the following specifications:
 
 To run the experiments for the AUTOSTOP algorithm [@li2020], a considerate amount of RAM is needed when applying it to large datasets. For a dataset of 15000 documents, 20 GB of RAM is needed, and memory consumption grows quadratically in terms of dataset size.
 
-### Experiments
+### Run the benchmark experiments
 
 You can perform a single experiment with the following commands:
 
@@ -151,11 +157,7 @@ Running the code in a container has the benefit that you do not run into depende
 
 ``` console
 $ podman build -t allib-chao .
-```
-
-Or:
-
-``` console
+# OR
 $ docker build -t allib-chao .
 ```
 
