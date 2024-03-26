@@ -17,6 +17,7 @@ import stat
 SMALL_MAX = 15000
 LARGE_MAX = 50000
 PREVALENCE_MIN = 10
+SIZE_MIN = 500
 EXPERIMENTS_LOW_MEMORY = (
     ExperimentCombination.AUTOTAR,
     ExperimentCombination.CHAO,
@@ -51,6 +52,7 @@ def divide_datasets(
     small_max=SMALL_MAX,
     large_max=LARGE_MAX,
     prevalence_min=PREVALENCE_MIN,
+    size_min=SIZE_MIN,
 ) -> Tuple[Sequence[str], Sequence[str], Sequence[str]]:
     dss_name = name if name else source_path.stem
     dstype = detect_type(source_path)
@@ -68,7 +70,7 @@ def divide_datasets(
         env = dss.get_env(topic)
         size = len(env.dataset)
         size_pos = env.truth.document_count(pos_label)
-        if size_pos > prevalence_min:
+        if size_pos > prevalence_min and size >= size_min:
             if size < small_max:
                 small_topics.append(topic)
             elif size < large_max:
@@ -120,7 +122,7 @@ def create_jobs(
     low_cpu: int = 2,
     trec_cmd: str = DEFAULT_REVIEW,
     review_cmd: str = DEFAULT_TREC,
-):
+) -> Path:
     create_dir_if_not_exists(jobpath)
     write_experiments_files(jobpath)
     copy_scripts(jobpath)
@@ -139,7 +141,7 @@ def create_jobs(
     sp = path.resolve()
     tp = target_path.resolve()
     cmds = [
-        "#!/bin/bash",
+        """#!/bin/bash""",
         f"{cmd} {sp} {small_path} {tp} {exp_low_path} {test_iterations} {high_cpu}",
         f"{cmd} {sp} {small_path} {tp} {exp_high_path} {test_iterations} {medium_cpu}",
         f"{cmd} {sp} {large_path} {tp} {exp_low_path} {test_iterations} {medium_cpu}",
@@ -150,7 +152,7 @@ def create_jobs(
     with ds_job.open("w") as fh:
         fh.write("\n".join(cmds))
     ds_job.chmod(ds_job.stat().st_mode | stat.S_IEXEC)
-
+    return ds_job
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -161,25 +163,26 @@ if __name__ == "__main__":
     parser.add_argument("-n", "--name", help="The name of the dataset", type=str)
     parser.add_argument("-t", "--target", help="The target of the results", type=Path)
     parser.add_argument('--iterations', type=int, default=30)
-    parser.add_argument("--highcpu", type=int, default=8)
-    parser.add_argument("--lowcpu", type=int, default=2)
-    parser.add_argument("--mediumcpu", type=int, default=4)
+    parser.add_argument("--lowmemcpu", type=int, default=8)
+    parser.add_argument("--highmemcpu", type=int, default=2)
+    parser.add_argument("--mediummemcpu", type=int, default=4)
     parser.add_argument("--reviewcmd", type=str, default=DEFAULT_REVIEW)
     parser.add_argument("--treccmd", type=str, default=DEFAULT_TREC)
     parser.add_argument("--pos_label", metavar="POS", default="Relevant",
         help="The label that denotes the positive class",
     )
     args = parser.parse_args()
-    create_jobs(
+    job_path = create_jobs(
         args.dataset,
         args.target,
         args.jobpath,
         args.pos_label,
         name=args.name,
-        high_cpu=args.highcpu,
-        medium_cpu=args.mediumcpu,
-        low_cpu=args.lowcpu,
+        high_cpu=args.lowmemcpu,
+        medium_cpu=args.mediummemcpu,
+        low_cpu=args.highmemcpu,
         review_cmd=args.reviewcmd,
         trec_cmd=args.treccmd,
         test_iterations=args.iterations
     )
+    print(str(job_path))
