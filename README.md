@@ -9,7 +9,11 @@ M.P. Bron, P.G.M. van der Heijden, A.J. Feelders, A.P.J.M. Siebes
 In this repository, we publish the code that was used to perform the
 experiments in our paper. In our work, we used our library
 [`python-allib`](https://github.com/mpbron/python-allib) to perform the
-experiment in our study.
+experiment in our study. Specifically, we use version `0.5.1`, stored
+[here](https://doi.org/10.5281/zenodo.10869848) \[1\]. The library
+`python-allib` itself is also usable for other purposes. This repository
+is intended to show our work on our stopping criterion and enable the
+reader to reproduce the results of our experiments.
 
 ## Installation
 
@@ -18,33 +22,35 @@ it as a zip archive.
 
 ## Download the datasets
 
-From [this file on
-SurfDrive](https://surfdrive.surf.nl/files/index.php/s/d74PiMieCQHcdMO)
-(provided by \[2\]), you can extract the CLEF2017, CLEF2018, CLEF2019
-sets. The archive can be expanded to a folder of your choosing. You can
-run the experiments on the other datasets included as well. Furthermore,
-we used datasets from
-[SYNERGY](https://github.com/asreview/synergy-dataset) \[1\] in our
+In our experiments, we used the following studies as benchmark data: We
+included the following datasets in our study:
+
+- [CLEF2017](https://npai.science.uu.nl/clefdatasets/clef2017.zip)
+- [CLEF2018](https://npai.science.uu.nl/clefdatasets/clef2018.zip)
+- [CLEF2019](https://npai.science.uu.nl/clefdatasets/clef2019.zip)
+- [SYNERGY](https://github.com/asreview/synergy-dataset)
+
+The CLEF datasets were originally provided by \[3\] on their
+[repository](https://github.com/dli1/auto-stop-tar), however, the data
+is no longer available from the link they provided, unfortunately.
+Therefore, we decided to make the data available again to make our
+experiments and results reproducible. The data is stored as a ZIP
+archive, and should be extracted at a location of your choosing. Besides
+the CLEF data, we used datasets from
+[SYNERGY](https://github.com/asreview/synergy-dataset) \[2\] in our
 experiments. Use the SYNERGY Python package to retrieve the datasets.
 
-We included the following datasets in our study:
-
-- CLEF2017
-- CLEF2018
-- CLEF2019
-- SYNERGY
-
-## Experiments on Bare Metal
+## Experiments (directly on your own system)
 
 ### System Requirements
 
 You need a system with the following specifications:
 
-- A Linux system (e.g., Ubuntu 22.04 LTS). Other systems may or may not
-  work, but this is not tested. If you are on Windows, consider using
+- A Linux system (e.g., Ubuntu 22.04 LTS). Other systems may work,
+  however, this is not tested. If you are on Windows, consider using
   WSL2 with a Ubuntu 22.04 installation.
 
-- Python 3.8 or higher.
+- Python 3.8 or higher, we performed our experiments on Python 3.10.
 
 - Install the Python requirements found in `requirements.txt` in a
   *virtual environment*. You can create one with the following command:
@@ -63,7 +69,7 @@ You need a system with the following specifications:
 - GNU Parallel for parallelization of the experiments (Can be installed
   on Ubuntu by issuing `sudo apt install parallel`)
 
-To run the experiments for the AUTOSTOP algorithm \[2\], a considerate
+To run the experiments for the AUTOSTOP algorithm \[3\], a considerate
 amount of RAM is needed when applying it to large datasets. For a
 dataset of 15000 documents, 20 GB of RAM is needed, and memory
 consumption grows quadratically in terms of dataset size.
@@ -91,7 +97,6 @@ script. In this repository, it can be found under the name
 
 ``` bash
 #!/bin/bash
-
 echo "Reading path $1 as dataset"
 echo "Setting $2 as dataset name"
 echo "Selecting path $3 as result target"
@@ -124,10 +129,9 @@ Executing jobs with High memory requirements with 1 CPU cores
 
 We repeated each experiment with 30 seed sets. As the individual
 experiments can run concurrently, we use GNU Parallel to speed up the
-process.  
-We executed our experiments on a machine with 512 GB of RAM and 48 CPU
-cores with the commands specified below. We advice you to adjust the
-core parameters to meet the specifications of your machine.
+process. We executed our experiments on a machine with 512 GB of RAM and
+48 CPU cores with the commands specified below. We advice you to adjust
+the core parameters to meet the specifications of your machine.
 
 ``` console
 $ ./run_benchmark.sh /path/to/synergy synergy ./results/synergy ./jobs 30 40 20 1
@@ -155,8 +159,11 @@ $ podman build -t allib-chao .
 $ docker build -t allib-chao .
 ```
 
-After building has succeeded, you can run the `run_benchmark_podman.sh`
-or `run_benchmark_docker.sh` script, which takes arguments in the same
+This will build the container according to the
+[`Dockerfile`](Dockerfile). This container is based on a Ubuntu 22.04
+LTS image, which already contains a working R installation. After
+building has succeeded, you can run the `run_benchmark_podman.sh` or
+`run_benchmark_docker.sh` script, which takes arguments in the same
 order as the `run_benchmark` script:
 
 ``` console
@@ -213,9 +220,17 @@ TODO: Insert BIBTEX of Paper
 
 <div id="refs" class="references csl-bib-body" entry-spacing="0">
 
-<div id="ref-debruin" class="csl-entry">
+<div id="ref-bron_2024_108698682" class="csl-entry">
 
 <span class="csl-left-margin">\[1\]
+</span><span class="csl-right-inline">Bron, M.P. 2024. [Python package
+python-allib](https://doi.org/10.5281/zenodo.10869848). Zenodo.</span>
+
+</div>
+
+<div id="ref-debruin" class="csl-entry">
+
+<span class="csl-left-margin">\[2\]
 </span><span class="csl-right-inline">Bruin, J. de et al. 2023.
 [SYNERGY - Open machine learning dataset on study selection in
 systematic reviews](https://doi.org/10.34894/HE6NAQ).</span>
@@ -224,7 +239,7 @@ systematic reviews](https://doi.org/10.34894/HE6NAQ).</span>
 
 <div id="ref-li2020" class="csl-entry">
 
-<span class="csl-left-margin">\[2\]
+<span class="csl-left-margin">\[3\]
 </span><span class="csl-right-inline">Li, D. and Kanoulas, E. 2020. When
 to Stop Reviewing in Technology-Assisted Reviews: Sampling from an
 Adaptive Distribution to Estimate Residual Relevant Documents. *ACM
