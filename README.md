@@ -2,8 +2,6 @@
 
 M.P. Bron, P.G.M. van der Heijden, A.J. Feelders, A.P.J.M. Siebes
 
-[![DOI](https://zenodo.org/badge/414780120.svg)](https://zenodo.org/doi/10.5281/zenodo.10869682)
-
 ------------------------------------------------------------------------
 
 In this repository, we publish the code that was used to perform the
