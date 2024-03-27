@@ -44,19 +44,19 @@ experiments. Use the SYNERGY Python package to retrieve the datasets.
 
 You need a system with the following specifications:
 
-- A Linux system (e.g., Ubuntu 22.04 LTS). Other systems may work,
-  however, this is not tested. If you are on Windows, consider using
-  WSL2 with a Ubuntu 22.04 installation.
+- A Linux system (e.g., Ubuntu 22.04 LTS). Other systems may work;
+  however, this has not been tested. If you are on Windows, consider
+  using WSL2 with a Ubuntu 22.04 installation.
 
 - Python 3.8 or higher, we performed our experiments on Python 3.10.
 
 - Install the Python requirements found in `requirements.txt` in a
   *virtual environment*. You can create one with the following command:
-  `python3 -m venv .venv`. It may be that you have to use `python`
-  instead of `python3` or have to install some packages on your system.
-  If you use Ubuntu, this will be indicated by your system. When you
-  have activated your virtual environment, you can install the
-  requirements by executing `pip install -r requirements.txt`.
+  `python3 -m venv .venv`. You may have to use `python` instead of
+  `python3` or install some packages on your system. If you use Ubuntu,
+  your system will indicate this. After activating your virtual
+  environment, you can install the requirements by executing
+  `pip install -r requirements.txt`.
 
 - R 3.6 or higher with the following packages
 
@@ -67,7 +67,7 @@ You need a system with the following specifications:
 - GNU Parallel for parallelization of the experiments (Can be installed
   on Ubuntu by issuing `sudo apt install parallel`)
 
-To run the experiments for the AUTOSTOP algorithm \[3\], a considerate
+To run the experiments for the AUTOSTOP algorithm \[3\], a considerable
 amount of RAM is needed when applying it to large datasets. For a
 dataset of 15000 documents, 20 GB of RAM is needed, and memory
 consumption grows quadratically in terms of dataset size.
@@ -82,15 +82,15 @@ For a CSV from SYNERGY:
 $ python -m allib benchmark -m Review -d  ./path/to/dataset -t ./path/to/results/ -e AUTOTAR -r 42
 ```
 
-For a dataset in TREC-style (e.g., CLEF). Note that you have to supply
-the TOPIC code.
+For a dataset in TREC-style (e.g., CLEF) use the following command. Note
+that you have to supply the TOPIC code.
 
 ``` console
 $ python -m allib benchmark -m Trec -d  ./path/to/dataset/ -i TOPIC -t ./path/to/results/ -e AUTOTAR -r 42
 ```
 
-For running a large scale on a dataset folder, we can use the following
-script. In this repository, it can be found under the name
+We can use the following script to run a large scale on a dataset
+folder. In this repository, it can be found under the name
 `run_benchmark.sh`.
 
 ``` bash
@@ -111,7 +111,7 @@ echo "Starting experiments"
 sh $jobpath
 ```
 
-Then, this script will can be invoked as follows:
+Then, this script can be invoked as follows:
 
 ``` console
 $ ./run_benchmark.sh /data/tardata/clef2019 clef2019 ./results ./jobs 1 8 4 1 
@@ -128,8 +128,8 @@ Executing jobs with High memory requirements with 1 CPU cores
 We repeated each experiment with 30 seed sets. As the individual
 experiments can run concurrently, we use GNU Parallel to speed up the
 process. We executed our experiments on a machine with 512 GB of RAM and
-48 CPU cores with the commands specified below. We advice you to adjust
-the core parameters to meet the specifications of your machine.
+48 CPU cores with the below commands. We advise you to adjust the core
+parameters to meet the specifications of your machine.
 
 ``` console
 $ ./run_benchmark.sh /path/to/synergy synergy ./results/synergy ./jobs 30 40 20 1
@@ -140,16 +140,18 @@ $ ./run_benchmark.sh /path/to/clef2019 clef2018 ./results/clef2019 ./jobs 30 40 
 
 ## Experiments in a container
 
-Running the code in a container has the benefit that you do not run into
-dependency issues, and everything is installed for you. Configuring `R`
-on Linux can be a hassle, and within the container, this is already
-fixed for you. You need a system with a container framework installed
-(e.g., `docker` or `podman`). We recommend using `podman` if you are new
-to containers, as this is easier to install. On Ubuntu 22.04 and above,
-you can install `podman` by executing `sudo apt install podman`. You can
-also run `podman` and `docker` on Windows and macOS. Once installed, you
-can issue the following command to build the container. Your current
-working directory should be the root of this repository.
+Besides running the code directly on your Ubuntu machine, you can also
+run the experiments in a container. Running the code in a container has
+the benefit that you do not have to install all dependencies yourself.
+For example, configuring `R` on Linux can be a hassle, and this is
+already fixed for you within the container. To use the container method,
+install a container framework (e.g., `docker` or `podman`). We recommend
+using `podman` if you are new to containers, as this is easier to
+install. On Ubuntu 22.04 and above, you can install `podman` by
+executing `sudo apt install podman`. You can also run `podman` and
+`docker` on Windows and macOS. Once installed, you can issue the
+following command to build the container. Your current working directory
+should be the root of this repository.
 
 ``` console
 $ podman build -t allib-chao .
@@ -157,7 +159,7 @@ $ podman build -t allib-chao .
 $ docker build -t allib-chao .
 ```
 
-This will build the container according to the
+This command will build the container using the
 [`Dockerfile`](Dockerfile). This container is based on a Ubuntu 22.04
 LTS image, which already contains a working R installation. After
 building has succeeded, you can run the `run_benchmark_podman.sh` or
@@ -179,11 +181,11 @@ Executing jobs with High memory requirements with 1 CPU cores
 ## Reading the results
 
 In the specified `results` directory (e.g., `./results/`), the raw
-results of a run are stored. For each run, a PDF file is generated as
-well as a Python object containing the raw data that generated the plot.
+results of a run are stored. For each run, a PDF file and a Python
+object containing the raw data that generated the plot are generated.
 This object is stored in `pickle` form (file extension `.pkl`), which
-can be read by using the `pickle` library, which is included in the
-Python standard library.
+can be read using the `pickle` library, which is included in the Python
+standard library.
 
 With the script `scripts/readdata.py`, the raw results of all run can be
 aggregated in a single Pandas DataFrame. This script can be run as
@@ -208,7 +210,7 @@ pd.read_pickle("/path/to/pickle_file.pkl")
 
 ## Citation
 
-If you want to specifically cite this repository, go to
+If you want to cite this repository specifically, go to
 [ZENODO](https://doi.org/10.5281/zenodo.10869682). Otherwise, please
 cite the paper
 
