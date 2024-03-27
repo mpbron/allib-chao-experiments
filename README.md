@@ -223,28 +223,30 @@ TODO: Insert BIBTEX of Paper
 <div id="ref-bron_2024_108698682" class="csl-entry">
 
 <span class="csl-left-margin">\[1\]
-</span><span class="csl-right-inline">Bron, M.P. 2024. [Python package
-python-allib](https://doi.org/10.5281/zenodo.10869848). Zenodo.</span>
+</span><span class="csl-right-inline">Michiel P. Bron. 2024. Python
+package python-allib.
+[10.5281/zenodo.10869848](https://doi.org/10.5281/zenodo.10869848)</span>
 
 </div>
 
 <div id="ref-debruin" class="csl-entry">
 
 <span class="csl-left-margin">\[2\]
-</span><span class="csl-right-inline">Bruin, J. de et al. 2023.
-[SYNERGY - Open machine learning dataset on study selection in
-systematic reviews](https://doi.org/10.34894/HE6NAQ).</span>
+</span><span class="csl-right-inline">Jonathan de Bruin, Yongchao Ma,
+Gerbrich Ferdinands, Jelle Teijema, and Rens van de Schoot. 2023.
+SYNERGY - Open machine learning dataset on study selection in systematic
+reviews. [10.34894/HE6NAQ](https://doi.org/10.34894/HE6NAQ)</span>
 
 </div>
 
 <div id="ref-li2020" class="csl-entry">
 
 <span class="csl-left-margin">\[3\]
-</span><span class="csl-right-inline">Li, D. and Kanoulas, E. 2020. When
-to Stop Reviewing in Technology-Assisted Reviews: Sampling from an
-Adaptive Distribution to Estimate Residual Relevant Documents. *ACM
-Transactions on Information Systems*. 38, 4 (Oct. 2020), 1–36.
-DOI:https://doi.org/[10.1145/3411755](https://doi.org/10.1145/3411755).</span>
+</span><span class="csl-right-inline">Dan Li and Evangelos Kanoulas.
+2020. When to Stop Reviewing in Technology-Assisted Reviews: Sampling
+from an Adaptive Distribution to Estimate Residual Relevant Documents.
+*ACM Transactions on Information Systems* 38, 4: 1–36.
+[10.1145/3411755](https://doi.org/10.1145/3411755)</span>
 
 </div>
 
