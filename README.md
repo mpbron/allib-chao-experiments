@@ -10,8 +10,8 @@ experiments in our paper. In our work, we used our library
 experiment in our study. Specifically, we use version `0.5.1`, stored
 [here](https://doi.org/10.5281/zenodo.10869848) \[1\]. The library
 `python-allib` itself is also usable for other purposes. This repository
-is intended to show our work on our stopping criterion and enable the
-reader to reproduce the results of our experiments.
+is intended to show our work on our stopping criterion simulation study
+and enable the reader to reproduce the results of our experiments.
 
 ## Installation
 
@@ -208,11 +208,21 @@ import pandas as pd
 pd.read_pickle("/path/to/pickle_file.pkl")
 ```
 
+## Raw results
+
+The raw results of our experiments can be downloaded using the following
+links. They are archived as `tar.xz` files for each dataset.
+
+- [CLEF2017](https://npai.science.uu.nl/clefdatasets/clef2017_results.tar.xz)
+- [CLEF2018](https://npai.science.uu.nl/clefdatasets/clef2018_results.tar.xz)
+- [CLEF2019](https://npai.science.uu.nl/clefdatasets/clef2019_results.tar.xz)
+- [SYNERGY](https://npai.science.uu.nl/clefdatasets/synergy_results.tar.xz)
+
 ## Citation
 
 If you want to cite this repository specifically, go to
-[ZENODO](https://doi.org/10.5281/zenodo.10869682). Otherwise, please
-cite the paper
+[ZENODO](https://zenodo.org/doi/10.5281/zenodo.10887073). Otherwise,
+please cite the paper.
 
 TODO: Insert BIBTEX of Paper
 
